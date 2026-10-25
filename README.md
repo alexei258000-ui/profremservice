@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Renovation — Премиальный ремонт квартир и домов под ключ в Москве</title>
+    <title>Проф Рем Сервис — Премиальный ремонт квартир и домов под ключ в Москве</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
