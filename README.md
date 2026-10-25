@@ -17,7 +17,7 @@
                             dark: '#0a0d0e',
                             surface: '#111618',
                             card: '#161c1f',
-                            accent: '#D4AF37', // Premium Gold Accent
+                            accent: '#D4AF37',
                             accentHover: '#C5A059',
                             goldLight: '#F3E5AB',
                             grayText: '#9CA3AF'
@@ -155,22 +155,22 @@
                     </a>
 
                     <!-- Кнопка открытия CRM -->
-                    <button onclick="toggleCRM()" class="bg-slate-800 hover:bg-slate-700 text-brand-accent border border-brand-accent/40 font-bold px-3.5 py-2.5 rounded-xl transition-all hover:scale-105 active:scale-95 text-xs flex items-center gap-2" title="Панель заявок">
+                    <button type="button" onclick="toggleCRM()" class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-brand-accent border border-brand-accent/40 font-bold px-3.5 py-2.5 rounded-xl transition-all hover:scale-105 active:scale-95 text-xs flex items-center gap-2 z-10" title="Панель заявок">
                         <i class="fa-solid fa-chart-line text-sm"></i>
                         <span>CRM</span>
                     </button>
 
-                    <button onclick="openModal('Заказать обратный звонок')" class="bg-gradient-to-r from-brand-accent to-amber-600 hover:from-brand-accentHover hover:to-amber-700 text-black font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 text-xs uppercase tracking-wider">
+                    <button type="button" onclick="openModal('Заказать обратный звонок')" class="cursor-pointer bg-gradient-to-r from-brand-accent to-amber-600 hover:from-brand-accentHover hover:to-amber-700 text-black font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 text-xs uppercase tracking-wider z-10">
                         Заказать звонок
                     </button>
                 </div>
 
                 <!-- Mobile Menu Button -->
                 <div class="lg:hidden flex items-center gap-3">
-                    <button onclick="toggleCRM()" class="bg-slate-800 text-brand-accent p-2 rounded-lg border border-brand-accent/30 text-xs">
+                    <button type="button" onclick="toggleCRM()" class="cursor-pointer bg-slate-800 text-brand-accent p-2 rounded-lg border border-brand-accent/30 text-xs">
                         <i class="fa-solid fa-chart-line text-base"></i>
                     </button>
-                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white p-2">
+                    <button type="button" id="mobile-menu-btn" onclick="toggleMobileMenu()" class="cursor-pointer text-gray-300 hover:text-white p-2">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -186,10 +186,10 @@
             <a href="#reviews" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-brand-accent py-2 border-b border-gray-800/50">Отзывы</a>
             <a href="#contact" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-brand-accent py-2">Контакты</a>
             <div class="pt-4 border-t border-gray-800 space-y-2">
-                <button onclick="toggleCRM(); toggleMobileMenu();" class="w-full bg-slate-800 text-brand-accent border border-brand-accent/40 font-bold py-3 rounded-xl uppercase text-xs tracking-wider flex items-center justify-center gap-2">
+                <button type="button" onclick="toggleCRM(); toggleMobileMenu();" class="cursor-pointer w-full bg-slate-800 text-brand-accent border border-brand-accent/40 font-bold py-3 rounded-xl uppercase text-xs tracking-wider flex items-center justify-center gap-2">
                     <i class="fa-solid fa-chart-line"></i> Панель заявок (CRM)
                 </button>
-                <button onclick="openModal('Заказать быстрый звонок'); toggleMobileMenu();" class="w-full bg-brand-accent text-black font-bold py-3 rounded-xl uppercase text-xs tracking-wider">
+                <button type="button" onclick="openModal('Заказать быстрый звонок'); toggleMobileMenu();" class="cursor-pointer w-full bg-brand-accent text-black font-bold py-3 rounded-xl uppercase text-xs tracking-wider">
                     Заказать звонок
                 </button>
             </div>
@@ -198,9 +198,6 @@
 
     <!-- HERO SECTION -->
     <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-        <div class="absolute top-1/4 left-10 w-96 h-96 bg-amber-600/10 rounded-full filter blur-[140px] pointer-events-none"></div>
-        <div class="absolute top-1/3 right-10 w-96 h-96 bg-brand-accent/10 rounded-full filter blur-[160px] pointer-events-none"></div>
-
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 
@@ -228,31 +225,11 @@
                             Смотреть работы
                         </a>
                     </div>
-
-                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-gray-800/80">
-                        <div>
-                            <div class="text-2xl sm:text-3xl font-extrabold text-white">10+ лет</div>
-                            <div class="text-xs text-gray-400 mt-1">Опыта в премиум-сегменте</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl sm:text-3xl font-extrabold text-white">350+</div>
-                            <div class="text-xs text-gray-400 mt-1">Сданных объектов</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl sm:text-3xl font-extrabold text-white">100%</div>
-                            <div class="text-xs text-gray-400 mt-1">Сдача точно в срок</div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Before / After Slider -->
                 <div class="lg:col-span-5">
                     <div class="glass-card p-4 rounded-2xl shadow-2xl relative">
-                        <div class="flex items-center justify-between mb-3 px-2">
-                            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Результат работы</span>
-                            <span class="text-[11px] px-2.5 py-1 rounded-full bg-brand-accent/20 text-brand-accent border border-brand-accent/30 font-medium">Пример объекта</span>
-                        </div>
-                        
                         <div class="ba-container h-80 sm:h-96 w-full relative">
                             <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&w=1000&q=80" alt="До" class="absolute inset-0 w-full h-full object-cover">
                             <span class="absolute top-4 right-4 bg-black/80 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md font-bold">ДО</span>
@@ -261,13 +238,6 @@
                                 <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=80" alt="После" class="absolute top-0 left-0 max-w-none h-full object-cover">
                                 <span class="absolute top-4 left-4 bg-brand-accent text-black font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">ПОСЛЕ</span>
                             </div>
-                        </div>
-
-                        <div class="mt-4 p-3 bg-brand-dark/60 rounded-xl flex items-center justify-between text-xs text-gray-300 border border-gray-800">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-location-dot text-brand-accent"></i> ЖК «Пресня Сити», 94 м²
-                            </div>
-                            <span class="text-brand-accent font-semibold">Дизайнерский ремонт</span>
                         </div>
                     </div>
                 </div>
@@ -282,64 +252,63 @@
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-xs font-bold text-brand-accent uppercase tracking-widest mb-2">Наши направления</h2>
                 <p class="text-3xl sm:text-4xl font-extrabold text-white">Виды ремонта и отделки</p>
-                <p class="text-gray-400 mt-3 text-sm">Подбираем индивидуальный пакет услуг под ваши задачи и бюджет</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300">
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 text-brand-accent flex items-center justify-center font-bold text-xl mb-6">
                             <i class="fa-solid fa-paint-roller"></i>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Косметический</h3>
-                        <p class="text-gray-400 text-xs leading-relaxed mb-6">Быстрое обновление интерьера: выравнивание и покраска стен, замена напольных покрытий.</p>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-6">Быстрое обновление интерьера: выравнивание и покраска стен, замена покрытий.</p>
                     </div>
                     <div>
                         <div class="text-brand-accent font-extrabold text-lg mb-4">от 12 000 ₽/м²</div>
-                        <button onclick="openModal('Косметический ремонт')" class="w-full py-2.5 border border-gray-700 hover:border-brand-accent text-xs font-semibold text-white hover:text-brand-accent rounded-xl transition-all">Заказать расчёт</button>
+                        <button type="button" onclick="openModal('Косметический ремонт')" class="cursor-pointer w-full py-2.5 border border-gray-700 hover:border-brand-accent text-xs font-semibold text-white hover:text-brand-accent rounded-xl transition-all">Заказать расчёт</button>
                     </div>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300 relative border-brand-accent/40">
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between relative border-brand-accent/40">
                     <span class="absolute -top-3 right-4 bg-brand-accent text-black font-extrabold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full">Популярный</span>
                     <div>
-                        <div class="w-12 h-12 rounded-xl bg-brand-accent/20 border border-brand-accent text-brand-accent flex items-center justify-center font-bold text-xl mb-6 shadow-md shadow-brand-accent/20">
+                        <div class="w-12 h-12 rounded-xl bg-brand-accent/20 border border-brand-accent text-brand-accent flex items-center justify-center font-bold text-xl mb-6">
                             <i class="fa-solid fa-hammer"></i>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Капитальный</h3>
-                        <p class="text-gray-400 text-xs leading-relaxed mb-6">Полная замена всех инженерных сетей, штукатурка по маякам, стяжка пола и отделка.</p>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-6">Полная замена сетей, штукатурка по маякам, стяжка пола и отделка.</p>
                     </div>
                     <div>
                         <div class="text-brand-accent font-extrabold text-lg mb-4">от 22 000 ₽/м²</div>
-                        <button onclick="openModal('Капитальный ремонт')" class="w-full py-2.5 bg-brand-accent hover:bg-brand-accentHover text-xs font-bold text-black rounded-xl transition-all">Заказать расчёт</button>
+                        <button type="button" onclick="openModal('Капитальный ремонт')" class="cursor-pointer w-full py-2.5 bg-brand-accent hover:bg-brand-accentHover text-xs font-bold text-black rounded-xl transition-all">Заказать расчёт</button>
                     </div>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300">
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 text-brand-accent flex items-center justify-center font-bold text-xl mb-6">
                             <i class="fa-solid fa-compass-drafting"></i>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Дизайнерский</h3>
-                        <p class="text-gray-400 text-xs leading-relaxed mb-6">Ремонт по уникальному 3D-проекту с авторским надзором и премиальными материалами.</p>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-6">Ремонт по уникальному 3D-проекту с авторским надзором.</p>
                     </div>
                     <div>
                         <div class="text-brand-accent font-extrabold text-lg mb-4">от 35 000 ₽/м²</div>
-                        <button onclick="openModal('Дизайнерский ремонт')" class="w-full py-2.5 border border-gray-700 hover:border-brand-accent text-xs font-semibold text-white hover:text-brand-accent rounded-xl transition-all">Заказать расчёт</button>
+                        <button type="button" onclick="openModal('Дизайнерский ремонт')" class="cursor-pointer w-full py-2.5 border border-gray-700 hover:border-brand-accent text-xs font-semibold text-white hover:text-brand-accent rounded-xl transition-all">Заказать расчёт</button>
                     </div>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300">
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/30 text-brand-accent flex items-center justify-center font-bold text-xl mb-6">
                             <i class="fa-solid fa-house-chimney-window"></i>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-2">Ремонт домов</h3>
-                        <p class="text-gray-400 text-xs leading-relaxed mb-6">Комплексная отделка коттеджей и таунхаусов: фасадные работы, монтаж котельных.</p>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-6">Комплексная отделка коттеджей и таунхаусов.</p>
                     </div>
                     <div>
                         <div class="text-brand-accent font-extrabold text-lg mb-4">от 28 000 ₽/м²</div>
-                        <button onclick="openModal('Ремонт домов')" class="w-full py-2.5 border border-gray-700 hover:border-brand-accent text-xs font-semibold text-white hover:text-brand-accent rounded-xl transition-all">Заказать расчёт</button>
+                        <button type="button" onclick="openModal('Ремонт домов')" class="cursor-pointer w-full py-2.5 border border-gray-700 hover:border-brand-accent text-xs font-semibold text-white hover:text-brand-accent rounded-xl transition-all">Заказать расчёт</button>
                     </div>
                 </div>
             </div>
@@ -352,7 +321,6 @@
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-xs font-bold text-brand-accent uppercase tracking-widest mb-2">Онлайн калькулятор</h2>
                 <p class="text-3xl sm:text-4xl font-extrabold text-white">Рассчитайте стоимость сметы</p>
-                <p class="text-gray-400 mt-3 text-sm">Укажите параметры вашего объекта и получите мгновенный расчёт бюджета</p>
             </div>
 
             <div class="grid lg:grid-cols-12 gap-8 items-start">
@@ -361,20 +329,17 @@
                     <div>
                         <label class="block text-sm font-bold text-gray-200 mb-4">1. Тип недвижимости</label>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <button type="button" class="calc-btn calc-housing p-4 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all active-calc-option" data-housing="1" onclick="selectCalcOption(this, 'calc-housing')">
+                            <button type="button" class="cursor-pointer calc-btn calc-housing p-4 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all active-calc-option" data-housing="1" onclick="selectCalcOption(this, 'calc-housing')">
                                 <i class="fa-solid fa-building text-brand-accent text-xl mb-2 block"></i>
                                 <div class="font-bold text-white text-sm">Новостройка</div>
-                                <div class="text-xs text-gray-400 mt-1">Черновая отделка</div>
                             </button>
-                            <button type="button" class="calc-btn calc-housing p-4 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-housing="1.15" onclick="selectCalcOption(this, 'calc-housing')">
+                            <button type="button" class="cursor-pointer calc-btn calc-housing p-4 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-housing="1.15" onclick="selectCalcOption(this, 'calc-housing')">
                                 <i class="fa-solid fa-house-chimney text-brand-accent text-xl mb-2 block"></i>
                                 <div class="font-bold text-white text-sm">Вторичка</div>
-                                <div class="text-xs text-gray-400 mt-1">С демонтажем</div>
                             </button>
-                            <button type="button" class="calc-btn calc-housing p-4 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-housing="1.25" onclick="selectCalcOption(this, 'calc-housing')">
+                            <button type="button" class="cursor-pointer calc-btn calc-housing p-4 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-housing="1.25" onclick="selectCalcOption(this, 'calc-housing')">
                                 <i class="fa-solid fa-house text-brand-accent text-xl mb-2 block"></i>
                                 <div class="font-bold text-white text-sm">Коттедж / Дом</div>
-                                <div class="text-xs text-gray-400 mt-1">Инженерные сети</div>
                             </button>
                         </div>
                     </div>
@@ -382,19 +347,19 @@
                     <div>
                         <label class="block text-sm font-bold text-gray-200 mb-4">2. Класс ремонта</label>
                         <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                            <button type="button" class="calc-btn calc-repair p-3.5 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-price="12000" onclick="selectCalcOption(this, 'calc-repair')">
+                            <button type="button" class="cursor-pointer calc-btn calc-repair p-3.5 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-price="12000" onclick="selectCalcOption(this, 'calc-repair')">
                                 <div class="font-bold text-white text-xs">Косметический</div>
                                 <div class="text-brand-accent font-extrabold text-xs mt-2">12 000 ₽/м²</div>
                             </button>
-                            <button type="button" class="calc-btn calc-repair p-3.5 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all active-calc-option" data-price="22000" onclick="selectCalcOption(this, 'calc-repair')">
+                            <button type="button" class="cursor-pointer calc-btn calc-repair p-3.5 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all active-calc-option" data-price="22000" onclick="selectCalcOption(this, 'calc-repair')">
                                 <div class="font-bold text-white text-xs">Капитальный</div>
                                 <div class="text-brand-accent font-extrabold text-xs mt-2">22 000 ₽/м²</div>
                             </button>
-                            <button type="button" class="calc-btn calc-repair p-3.5 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-price="35000" onclick="selectCalcOption(this, 'calc-repair')">
+                            <button type="button" class="cursor-pointer calc-btn calc-repair p-3.5 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-price="35000" onclick="selectCalcOption(this, 'calc-repair')">
                                 <div class="font-bold text-white text-xs">Дизайнерский</div>
                                 <div class="text-brand-accent font-extrabold text-xs mt-2">35 000 ₽/м²</div>
                             </button>
-                            <button type="button" class="calc-btn calc-repair p-3.5 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-price="50000" onclick="selectCalcOption(this, 'calc-repair')">
+                            <button type="button" class="cursor-pointer calc-btn calc-repair p-3.5 rounded-xl border border-gray-800 bg-brand-dark/60 text-left transition-all" data-price="50000" onclick="selectCalcOption(this, 'calc-repair')">
                                 <div class="font-bold text-white text-xs">Премиум</div>
                                 <div class="text-brand-accent font-extrabold text-xs mt-2">50 000 ₽/м²</div>
                             </button>
@@ -412,30 +377,13 @@
 
                 <div class="lg:col-span-4 glass-card p-6 sm:p-8 rounded-2xl border-brand-accent/40 space-y-6 sticky top-28">
                     <h3 class="text-lg font-extrabold text-white border-b border-gray-800 pb-4">Предварительная смета</h3>
-
-                    <div class="space-y-3 text-xs">
-                        <div class="flex justify-between text-gray-400">
-                            <span>Черновые материалы:</span>
-                            <span class="text-emerald-400 font-bold">Включены</span>
-                        </div>
-                        <div class="flex justify-between text-gray-400">
-                            <span>Технадзор:</span>
-                            <span class="text-emerald-400 font-bold">Бесплатно</span>
-                        </div>
-                        <div class="flex justify-between text-gray-400">
-                            <span>Гарантия:</span>
-                            <span class="text-brand-accent font-bold">5 лет</span>
-                        </div>
-                    </div>
-
                     <div class="pt-4 border-t border-gray-800">
                         <span class="text-xs text-gray-400 block uppercase font-semibold">Итоговая стоимость:</span>
                         <div id="total-price" class="text-3xl sm:text-4xl font-black gold-gradient-text my-2">
                             1 650 000 ₽
                         </div>
                     </div>
-
-                    <button onclick="submitCalculatorLead()" class="w-full bg-gradient-to-r from-brand-accent to-amber-600 hover:from-brand-accentHover hover:to-amber-700 text-black font-extrabold py-4 rounded-xl shadow-lg shadow-amber-500/20 uppercase tracking-wider text-xs transition-all hover:scale-105">
+                    <button type="button" onclick="submitCalculatorLead()" class="cursor-pointer w-full bg-gradient-to-r from-brand-accent to-amber-600 hover:from-brand-accentHover hover:to-amber-700 text-black font-extrabold py-4 rounded-xl shadow-lg shadow-amber-500/20 uppercase tracking-wider text-xs transition-all hover:scale-105">
                         Отправить расчёт в CRM
                     </button>
                 </div>
@@ -452,67 +400,29 @@
                 <p class="text-3xl sm:text-4xl font-extrabold text-white">Реализованные проекты</p>
             </div>
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass-card rounded-2xl overflow-hidden group">
+                <div class="glass-card rounded-2xl overflow-hidden">
                     <div class="h-60 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Проект">
-                        <span class="absolute top-3 left-3 bg-brand-accent text-black font-bold text-[10px] px-2.5 py-1 rounded-full">Москва-Сити</span>
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Проект">
                     </div>
                     <div class="p-6">
                         <h3 class="text-lg font-bold text-white mb-1">Апартаменты 110 м²</h3>
-                        <p class="text-gray-400 text-xs">Современный неоклассический стиль</p>
                     </div>
                 </div>
-                <div class="glass-card rounded-2xl overflow-hidden group">
+                <div class="glass-card rounded-2xl overflow-hidden">
                     <div class="h-60 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Проект">
-                        <span class="absolute top-3 left-3 bg-brand-accent text-black font-bold text-[10px] px-2.5 py-1 rounded-full">ЖК Хамовники</span>
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Проект">
                     </div>
                     <div class="p-6">
                         <h3 class="text-lg font-bold text-white mb-1">Квартира 85 м²</h3>
-                        <p class="text-gray-400 text-xs">Минимализм и эко-дизайн</p>
                     </div>
                 </div>
-                <div class="glass-card rounded-2xl overflow-hidden group">
+                <div class="glass-card rounded-2xl overflow-hidden">
                     <div class="h-60 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Проект">
-                        <span class="absolute top-3 left-3 bg-brand-accent text-black font-bold text-[10px] px-2.5 py-1 rounded-full">Рублево-Успенское</span>
+                        <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Проект">
                     </div>
                     <div class="p-6">
                         <h3 class="text-lg font-bold text-white mb-1">Коттедж 240 м²</h3>
-                        <p class="text-gray-400 text-xs">Авторский ремонт под ключ</p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROCESS & REVIEWS SECTION -->
-    <section id="process" class="py-20 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs font-bold text-brand-accent uppercase tracking-widest mb-2">Как мы работаем</h2>
-                <p class="text-3xl sm:text-4xl font-extrabold text-white">4 простых шага к вашей мечте</p>
-            </div>
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="glass-card p-6 rounded-2xl text-center">
-                    <div class="w-12 h-12 bg-brand-accent/20 text-brand-accent rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 border border-brand-accent/40">1</div>
-                    <h3 class="font-bold text-white mb-2">Заявка и замер</h3>
-                    <p class="text-gray-400 text-xs">Вы оставляете заявку, наш специалист выезжает на объект.</p>
-                </div>
-                <div class="glass-card p-6 rounded-2xl text-center">
-                    <div class="w-12 h-12 bg-brand-accent/20 text-brand-accent rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 border border-brand-accent/40">2</div>
-                    <h3 class="font-bold text-white mb-2">Смета и договор</h3>
-                    <p class="text-gray-400 text-xs">Составляем точную смету и фиксируем цену в договоре.</p>
-                </div>
-                <div class="glass-card p-6 rounded-2xl text-center">
-                    <div class="w-12 h-12 bg-brand-accent/20 text-brand-accent rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 border border-brand-accent/40">3</div>
-                    <h3 class="font-bold text-white mb-2">Ремонт и отчеты</h3>
-                    <p class="text-gray-400 text-xs">Выполняем работы с фотоотчетами и контролем качества.</p>
-                </div>
-                <div class="glass-card p-6 rounded-2xl text-center">
-                    <div class="w-12 h-12 bg-brand-accent/20 text-brand-accent rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 border border-brand-accent/40">4</div>
-                    <h3 class="font-bold text-white mb-2">Сдача объекта</h3>
-                    <p class="text-gray-400 text-xs">Клининг, проверка и выдача гарантии на 5 лет.</p>
                 </div>
             </div>
         </div>
@@ -527,7 +437,7 @@
             </div>
             <div class="flex items-center gap-6">
                 <a href="tel:+74959998877" class="text-white font-bold hover:text-brand-accent transition">+7 (495) 999-88-77</a>
-                <button onclick="toggleCRM()" class="bg-slate-800 text-brand-accent border border-brand-accent/40 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2">
+                <button type="button" onclick="toggleCRM()" class="cursor-pointer bg-slate-800 text-brand-accent border border-brand-accent/40 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2">
                     <i class="fa-solid fa-chart-line"></i> Вход в CRM
                 </button>
             </div>
@@ -535,7 +445,7 @@
     </footer>
 
     <!-- CRM PANEL OVERLAY -->
-    <section id="crm-panel" class="hidden fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-xl overflow-y-auto text-slate-100 p-6">
+    <div id="crm-panel" class="hidden fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-xl overflow-y-auto text-slate-100 p-6">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-between pb-6 border-b border-slate-800 mb-6">
                 <div class="flex items-center space-x-3">
@@ -545,8 +455,8 @@
                     <h2 class="text-xl font-bold">Панель управления заявками (CRM)</h2>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="exportData()" class="px-3 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs hover:bg-slate-700">Экспорт в Excel</button>
-                    <button onclick="toggleCRM()" class="p-2 bg-rose-600/20 text-rose-400 rounded-xl">
+                    <button type="button" onclick="exportData()" class="cursor-pointer px-3 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs hover:bg-slate-700">Экспорт в Excel</button>
+                    <button type="button" onclick="toggleCRM()" class="cursor-pointer p-2 bg-rose-600/20 text-rose-400 rounded-xl">
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
@@ -560,25 +470,4 @@
                             <th class="py-3 px-4">Телефон</th>
                             <th class="py-3 px-4">Услуга / Запрос</th>
                             <th class="py-3 px-4">Дата</th>
-                            <th class="py-3 px-4 text-right">Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leadsTableBody" class="divide-y divide-slate-800">
-                        <!-- Leads go here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- MODAL FORM -->
-    <div id="modalForm" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-brand-card rounded-2xl border border-brand-accent/30 max-w-md w-full p-6 relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3 id="modalFormTitle" class="text-lg font-bold text-white mb-4">Заказать звонок</h3>
-            <form onsubmit="handleWebsiteSubmit(event)" class="space-y-4">
-                <input type="hidden" id="formSubject" value="Заявка с сайта">
-                <input type="text" id="custName" required placeholder="Ваше имя" class="w-full px-4 py-2 bg-brand-dark border border-gray-800 rounded-xl text-sm text-white focus:border-brand-accent outline-none">
-                <input type="tel" id="custPhone" required placeholder="Ваш телефон"
+                            <th class="py-3 px-4 text-
