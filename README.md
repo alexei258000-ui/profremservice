@@ -455,10 +455,6 @@
 
     <!-- SCRIPTS -->
     <script>
-        let leads = JSON.parse(localStorage.getItem('crm_leads')) || [
-            { id: 1, name: 'Михаил Решетов', phone: '+7 (926) 111-22-33', service: 'Капитальный ремонт', date: '2026-06-06 12:40' }
-        ];
-
         document.addEventListener('DOMContentLoaded', () => {
             closeModal();
             updateCalculator();
@@ -523,9 +519,15 @@
         }
 
         function addLeadToCRM(name, phone, service) {
+            let leads = JSON.parse(localStorage.getItem('crm_leads')) || [
+                { id: 1, name: 'Михаил Решетов', phone: '+7 (926) 111-22-33', service: 'Капитальный ремонт', date: '2026-06-06 12:40' }
+            ];
+
             const now = new Date();
             const dateStr = now.toISOString().slice(0,10) + ' ' + now.toTimeString().slice(0,5);
-            leads.unshift({ id: Date.now(), name, phone, service, date: dateStr });
+            
+            leads.unshift({ id: Date.now(), name, phone, service, date: dateStr, status: 'new', notes: '' });
+            
             localStorage.setItem('crm_leads', JSON.stringify(leads));
         }
     </script>
