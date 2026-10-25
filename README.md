@@ -145,7 +145,7 @@
                     <a href="#contact" class="hover:text-brand-accent transition-colors">Контакты</a>
                 </nav>
 
-                <!-- Phone & CRM Button -->
+                <!-- Phone & CTA Button -->
                 <div class="hidden sm:flex items-center space-x-5">
                     <a href="tel:+74959998877" class="text-right">
                         <div class="text-sm font-extrabold text-white hover:text-brand-accent transition-colors">+7 (495) 999-88-77</div>
@@ -154,12 +154,6 @@
                         </div>
                     </a>
 
-                    <!-- Кнопка открытия CRM -->
-                    <button type="button" onclick="toggleCRM()" class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-brand-accent border border-brand-accent/40 font-bold px-3.5 py-2.5 rounded-xl transition-all hover:scale-105 active:scale-95 text-xs flex items-center gap-2 z-10" title="Панель заявок">
-                        <i class="fa-solid fa-chart-line text-sm"></i>
-                        <span>CRM</span>
-                    </button>
-
                     <button type="button" onclick="openModal('Заказать обратный звонок')" class="cursor-pointer bg-gradient-to-r from-brand-accent to-amber-600 hover:from-brand-accentHover hover:to-amber-700 text-black font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 text-xs uppercase tracking-wider z-10">
                         Заказать звонок
                     </button>
@@ -167,9 +161,6 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="lg:hidden flex items-center gap-3">
-                    <button type="button" onclick="toggleCRM()" class="cursor-pointer bg-slate-800 text-brand-accent p-2 rounded-lg border border-brand-accent/30 text-xs">
-                        <i class="fa-solid fa-chart-line text-base"></i>
-                    </button>
                     <button type="button" id="mobile-menu-btn" onclick="toggleMobileMenu()" class="cursor-pointer text-gray-300 hover:text-white p-2">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
@@ -186,9 +177,6 @@
             <a href="#reviews" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-brand-accent py-2 border-b border-gray-800/50">Отзывы</a>
             <a href="#contact" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-brand-accent py-2">Контакты</a>
             <div class="pt-4 border-t border-gray-800 space-y-2">
-                <button type="button" onclick="toggleCRM(); toggleMobileMenu();" class="cursor-pointer w-full bg-slate-800 text-brand-accent border border-brand-accent/40 font-bold py-3 rounded-xl uppercase text-xs tracking-wider flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-chart-line"></i> Панель заявок (CRM)
-                </button>
                 <button type="button" onclick="openModal('Заказать быстрый звонок'); toggleMobileMenu();" class="cursor-pointer w-full bg-brand-accent text-black font-bold py-3 rounded-xl uppercase text-xs tracking-wider">
                     Заказать звонок
                 </button>
@@ -384,7 +372,7 @@
                         </div>
                     </div>
                     <button type="button" onclick="submitCalculatorLead()" class="cursor-pointer w-full bg-gradient-to-r from-brand-accent to-amber-600 hover:from-brand-accentHover hover:to-amber-700 text-black font-extrabold py-4 rounded-xl shadow-lg shadow-amber-500/20 uppercase tracking-wider text-xs transition-all hover:scale-105">
-                        Отправить расчёт в CRM
+                        Оставить заявку
                     </button>
                 </div>
 
@@ -437,37 +425,110 @@
             </div>
             <div class="flex items-center gap-6">
                 <a href="tel:+74959998877" class="text-white font-bold hover:text-brand-accent transition">+7 (495) 999-88-77</a>
-                <button type="button" onclick="toggleCRM()" class="cursor-pointer bg-slate-800 text-brand-accent border border-brand-accent/40 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2">
-                    <i class="fa-solid fa-chart-line"></i> Вход в CRM
+                <button type="button" onclick="openModal('Заказать звонок из футера')" class="cursor-pointer bg-brand-accent text-black font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider">
+                    Заказать звонок
                 </button>
             </div>
         </div>
     </footer>
 
-    <!-- CRM PANEL OVERLAY -->
-    <div id="crm-panel" class="hidden fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-xl overflow-y-auto text-slate-100 p-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex items-center justify-between pb-6 border-b border-slate-800 mb-6">
-                <div class="flex items-center space-x-3">
-                    <div class="bg-brand-accent text-black p-2 rounded-xl font-bold">
-                        <i class="fa-solid fa-chart-line text-lg"></i>
-                    </div>
-                    <h2 class="text-xl font-bold">Панель управления заявками (CRM)</h2>
+    <!-- MODAL FORM -->
+    <div id="modalForm" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-brand-card rounded-2xl border border-brand-accent/30 max-w-md w-full p-6 relative shadow-2xl">
+            <button type="button" onclick="closeModal()" class="cursor-pointer absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 id="modalFormTitle" class="text-lg font-bold text-white mb-4">Заказать звонок</h3>
+            <form onsubmit="handleWebsiteSubmit(event)" class="space-y-4">
+                <input type="hidden" id="formSubject" value="Заявка с сайта">
+                <div>
+                    <input type="text" id="custName" required placeholder="Ваше имя" class="w-full px-4 py-2 bg-brand-dark border border-gray-800 rounded-xl text-sm text-white focus:border-brand-accent outline-none">
                 </div>
-                <div class="flex items-center gap-3">
-                    <button type="button" onclick="exportData()" class="cursor-pointer px-3 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs hover:bg-slate-700">Экспорт в Excel</button>
-                    <button type="button" onclick="toggleCRM()" class="cursor-pointer p-2 bg-rose-600/20 text-rose-400 rounded-xl">
-                        <i class="fa-solid fa-xmark text-lg"></i>
-                    </button>
+                <div>
+                    <input type="tel" id="custPhone" required placeholder="Ваш телефон" class="w-full px-4 py-2 bg-brand-dark border border-gray-800 rounded-xl text-sm text-white focus:border-brand-accent outline-none">
                 </div>
-            </div>
+                <button type="submit" class="cursor-pointer w-full bg-brand-accent text-black font-extrabold py-3 rounded-xl uppercase tracking-wider text-xs">
+                    Отправить заявку
+                </button>
+            </form>
+        </div>
+    </div>
 
-            <div class="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
-                <table class="w-full text-left text-xs">
-                    <thead class="bg-slate-950 text-slate-400 border-b border-slate-800">
-                        <tr>
-                            <th class="py-3 px-4">Клиент</th>
-                            <th class="py-3 px-4">Телефон</th>
-                            <th class="py-3 px-4">Услуга / Запрос</th>
-                            <th class="py-3 px-4">Дата</th>
-                            <th class="py-3 px-4 text-
+    <!-- SCRIPTS -->
+    <script>
+        let leads = JSON.parse(localStorage.getItem('crm_leads')) || [
+            { id: 1, name: 'Михаил Решетов', phone: '+7 (926) 111-22-33', service: 'Капитальный ремонт', date: '2026-06-06 12:40' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            closeModal();
+            updateCalculator();
+        });
+
+        function openModal(subject = 'Заявка с сайта') {
+            document.getElementById('formSubject').value = subject;
+            document.getElementById('modalFormTitle').innerText = subject;
+            document.getElementById('modalForm').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modalForm').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function handleWebsiteSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const subject = document.getElementById('formSubject').value;
+
+            addLeadToCRM(name, phone, subject);
+            closeModal();
+            alert('Спасибо! Ваша заявка успешно отправлена.');
+            e.target.reset();
+        }
+
+        function updateCalculator() {
+            const areaRange = document.getElementById('area-range');
+            const areaVal = document.getElementById('area-val');
+            const totalPrice = document.getElementById('total-price');
+            
+            if (!areaRange || !areaVal || !totalPrice) return;
+
+            const area = areaRange.value;
+            areaVal.innerText = area;
+
+            const activeHousing = document.querySelector('.calc-housing.active-calc-option');
+            const activeRepair = document.querySelector('.calc-repair.active-calc-option');
+
+            const selectedHousing = parseFloat(activeHousing ? activeHousing.dataset.housing : 1);
+            const selectedRepair = parseFloat(activeRepair ? activeRepair.dataset.price : 22000);
+
+            const total = Math.round(area * selectedRepair * selectedHousing);
+            totalPrice.innerText = total.toLocaleString('ru-RU') + ' ₽';
+        }
+
+        function selectCalcOption(btn, groupClass) {
+            document.querySelectorAll('.' + groupClass).forEach(b => b.classList.remove('active-calc-option'));
+            btn.classList.add('active-calc-option');
+            updateCalculator();
+        }
+
+        function submitCalculatorLead() {
+            const area = document.getElementById('area-range').value;
+            const price = document.getElementById('total-price').innerText;
+            openModal('Заявка с калькулятора (' + area + ' м², ' + price + ')');
+        }
+
+        function addLeadToCRM(name, phone, service) {
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0,10) + ' ' + now.toTimeString().slice(0,5);
+            leads.unshift({ id: Date.now(), name, phone, service, date: dateStr });
+            localStorage.setItem('crm_leads', JSON.stringify(leads));
+        }
+    </script>
+</body>
+</html>
