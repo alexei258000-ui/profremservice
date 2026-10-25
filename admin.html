@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeadFlow CRM — Управление заявками с сайта</title>
+    <title>Elite Renovation CRM — Управление заявками</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,17 +11,30 @@
             darkMode: 'class',
             theme: {
                 extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0d0e',
+                            surface: '#111618',
+                            card: '#161c1f',
+                            accent: '#D4AF37',
+                            accentHover: '#C5A059'
+                        }
+                    },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                    },
+                    }
                 }
             }
         }
     </script>
     <!-- Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- SheetJS для экспорта в Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body class="h-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-200 flex flex-col">
 
@@ -29,26 +42,24 @@
     <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-30 shadow-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
-                    <i data-lucide="layers" class="w-6 h-6"></i>
+                <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-black shadow-md font-bold">
+                    <i class="fa-solid fa-crown text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">LeadFlow CRM</h1>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Система управления заявками с сайта</p>
+                    <h1 class="text-lg font-bold tracking-tight text-amber-500">Elite Renovation CRM</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Панель управления заявками с сайта</p>
                 </div>
             </div>
 
             <!-- Header Actions -->
             <div class="flex items-center space-x-3">
-                <!-- Simulate Lead Button -->
-                <button onclick="simulateNewLead()" class="hidden sm:inline-flex items-center space-x-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-3.5 py-2 rounded-lg text-sm font-medium shadow-sm transition-all transform active:scale-95 cursor-pointer">
-                    <i data-lucide="zap" class="w-4 h-4"></i>
-                    <span>Имитировать заявку с сайта</span>
-                </button>
+                <a href="index.html" class="inline-flex items-center space-x-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-800 dark:text-white px-3.5 py-2 rounded-lg text-sm font-medium transition-all">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                    <span class="hidden sm:inline">На сайт</span>
+                </a>
 
-                <!-- Add Lead Manual -->
-                <button onclick="openAddModal()" class="inline-flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-3.5 py-2 rounded-lg text-sm font-medium shadow-sm transition-all transform active:scale-95 cursor-pointer">
-                    <i data-lucide="plus" class="w-4 h-4"></i>
+                <button onclick="openAddModal()" class="inline-flex items-center space-x-2 bg-amber-500 hover:bg-amber-600 text-black px-3.5 py-2 rounded-lg text-sm font-bold shadow-sm transition-all cursor-pointer">
+                    <i class="fa-solid fa-plus text-xs"></i>
                     <span class="hidden md:inline">Добавить заявку</span>
                 </button>
 
@@ -64,21 +75,13 @@
     <!-- Main Content Container -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-        <!-- Mobile Simulate Button -->
-        <div class="sm:hidden">
-            <button onclick="simulateNewLead()" class="w-full flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl text-sm font-medium shadow-sm">
-                <i data-lucide="zap" class="w-4 h-4"></i>
-                <span>Имитировать заявку с сайта</span>
-            </button>
-        </div>
-
         <!-- Statistics Header Cards -->
         <section class="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col justify-between">
                 <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
                     <span class="text-xs font-semibold uppercase tracking-wider">Всего заявок</span>
-                    <div class="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400">
-                        <i data-lucide="inbox" class="w-4 h-4"></i>
+                    <div class="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-500">
+                        <i class="fa-solid fa-inbox"></i>
                     </div>
                 </div>
                 <div class="flex items-baseline justify-between">
@@ -90,21 +93,21 @@
             <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col justify-between">
                 <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
                     <span class="text-xs font-semibold uppercase tracking-wider">Новые</span>
-                    <div class="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400">
-                        <i data-lucide="bell" class="w-4 h-4"></i>
+                    <div class="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-500">
+                        <i class="fa-solid fa-bell"></i>
                     </div>
                 </div>
                 <div class="flex items-baseline justify-between">
                     <span id="stat-new" class="text-2xl font-bold tracking-tight">0</span>
-                    <span class="text-xs text-amber-600 dark:text-amber-400 font-medium" id="stat-new-badge">Требуют внимания</span>
+                    <span class="text-xs text-amber-500 font-medium">Требуют внимания</span>
                 </div>
             </div>
 
             <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col justify-between">
                 <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
                     <span class="text-xs font-semibold uppercase tracking-wider">В работе</span>
-                    <div class="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400">
-                        <i data-lucide="clock" class="w-4 h-4"></i>
+                    <div class="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-500">
+                        <i class="fa-solid fa-clock"></i>
                     </div>
                 </div>
                 <div class="flex items-baseline justify-between">
@@ -116,21 +119,21 @@
             <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col justify-between">
                 <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
                     <span class="text-xs font-semibold uppercase tracking-wider">Завершенные</span>
-                    <div class="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400">
-                        <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                    <div class="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-500">
+                        <i class="fa-solid fa-check-circle"></i>
                     </div>
                 </div>
                 <div class="flex items-baseline justify-between">
                     <span id="stat-completed" class="text-2xl font-bold tracking-tight">0</span>
-                    <span class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Успешно</span>
+                    <span class="text-xs text-emerald-500 font-medium">Успешно</span>
                 </div>
             </div>
 
             <div class="col-span-2 md:col-span-1 bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col justify-between">
                 <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-                    <span class="text-xs font-semibold uppercase tracking-wider">Конверсия успеха</span>
-                    <div class="p-2 rounded-lg bg-violet-50 dark:bg-violet-950/50 text-violet-600 dark:text-violet-400">
-                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                    <span class="text-xs font-semibold uppercase tracking-wider">Конверсия</span>
+                    <div class="p-2 rounded-lg bg-violet-50 dark:bg-violet-950/50 text-violet-500">
+                        <i class="fa-solid fa-chart-line"></i>
                     </div>
                 </div>
                 <div class="flex items-baseline justify-between">
@@ -142,18 +145,17 @@
 
         <!-- Controls & Filters Bar -->
         <section class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col lg:flex-row gap-4 items-center justify-between">
-            <!-- Search & Filters -->
             <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-3 flex-1">
                 <!-- Search input -->
                 <div class="relative flex-1">
                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                        <i data-lucide="search" class="w-4 h-4"></i>
+                        <i class="fa-solid fa-search text-xs"></i>
                     </span>
-                    <input type="text" id="search-input" oninput="filterLeads()" placeholder="Поиск по имени, телефону, email, сообщению..." class="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                    <input type="text" id="search-input" oninput="filterLeads()" placeholder="Поиск по имени, телефону, услуге..." class="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all">
                 </div>
 
                 <!-- Status Filter -->
-                <select id="status-filter" onchange="filterLeads()" class="px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer">
+                <select id="status-filter" onchange="filterLeads()" class="px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all cursor-pointer">
                     <option value="all">Все статусы</option>
                     <option value="new">Новые</option>
                     <option value="in_progress">В работе</option>
@@ -162,20 +164,20 @@
                 </select>
 
                 <!-- Category Filter -->
-                <select id="category-filter" onchange="filterLeads()" class="px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer">
+                <select id="category-filter" onchange="filterLeads()" class="px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all cursor-pointer">
                     <option value="all">Все услуги</option>
-                    <option value="Разработка сайта">Разработка сайта</option>
-                    <option value="SEO-продвижение">SEO-продвижение</option>
-                    <option value="Техподдержка">Техподдержка</option>
-                    <option value="UI/UX Дизайн">UI/UX Дизайн</option>
-                    <option value="Консультация">Консультация</option>
+                    <option value="Косметический ремонт">Косметический ремонт</option>
+                    <option value="Капитальный ремонт">Капитальный ремонт</option>
+                    <option value="Дизайнерский ремонт">Дизайнерский ремонт</option>
+                    <option value="Ремонт домов">Ремонт домов</option>
+                    <option value="Заказать звонок">Заказать звонок</option>
                 </select>
             </div>
 
             <!-- View Switch & Extra Controls -->
             <div class="w-full lg:w-auto flex items-center justify-between lg:justify-end gap-3 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-700">
                 <!-- Sort Order -->
-                <select id="sort-order" onchange="filterLeads()" class="px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer">
+                <select id="sort-order" onchange="filterLeads()" class="px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all cursor-pointer">
                     <option value="newest">Сначала новые</option>
                     <option value="oldest">Сначала старые</option>
                     <option value="name">По имени</option>
@@ -183,32 +185,32 @@
 
                 <!-- View Mode Buttons -->
                 <div class="flex items-center bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="setViewMode('table')" id="view-btn-table" class="p-1.5 rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-xs transition-all cursor-pointer" title="Табличный вид">
-                        <i data-lucide="table" class="w-4 h-4"></i>
+                    <button onclick="setViewMode('table')" id="view-btn-table" class="p-1.5 rounded-lg text-amber-500 bg-white dark:bg-slate-800 shadow-xs transition-all cursor-pointer" title="Табличный вид">
+                        <i class="fa-solid fa-table text-xs"></i>
                     </button>
                     <button onclick="setViewMode('cards')" id="view-btn-cards" class="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-all cursor-pointer" title="Карточный вид">
-                        <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                        <i class="fa-solid fa-grip text-xs"></i>
                     </button>
                 </div>
 
-                <!-- Export / Reset Dropdown menu or buttons -->
+                <!-- Export / Menu -->
                 <div class="relative">
-                    <button onclick="toggleExportMenu()" class="p-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300 transition-all cursor-pointer" title="Экспорт данных">
-                        <i data-lucide="download" class="w-4 h-4"></i>
+                    <button onclick="toggleExportMenu()" class="p-2 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300 transition-all cursor-pointer" title="Экспорт данных">
+                        <i class="fa-solid fa-download text-xs"></i>
                     </button>
                     <div id="export-menu" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg py-1 z-20">
-                        <button onclick="exportData('json')" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center space-x-2">
-                            <i data-lucide="file-code" class="w-3.5 h-3.5 text-indigo-500"></i>
+                        <button onclick="exportExcel()" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center space-x-2 cursor-pointer">
+                            <i class="fa-solid fa-file-excel text-emerald-500"></i>
+                            <span>Экспорт в Excel</span>
+                        </button>
+                        <button onclick="exportJSON()" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center space-x-2 cursor-pointer">
+                            <i class="fa-solid fa-file-code text-amber-500"></i>
                             <span>Экспорт в JSON</span>
                         </button>
-                        <button onclick="exportData('csv')" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center space-x-2">
-                            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-500"></i>
-                            <span>Экспорт в CSV</span>
-                        </button>
                         <div class="border-t border-slate-200 dark:border-slate-700 my-1"></div>
-                        <button onclick="resetDemoData()" class="w-full text-left px-4 py-2 text-xs text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 flex items-center space-x-2">
-                            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-                            <span>Сбросить демо-данные</span>
+                        <button onclick="resetDemoData()" class="w-full text-left px-4 py-2 text-xs text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 flex items-center space-x-2 cursor-pointer">
+                            <i class="fa-solid fa-rotate-ccw"></i>
+                            <span>Сбросить данные</span>
                         </button>
                     </div>
                 </div>
@@ -223,315 +225,273 @@
                     <thead>
                         <tr class="bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-700 text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                             <th class="py-3.5 px-6">Клиент</th>
-                            <th class="py-3.5 px-4">Контакты</th>
-                            <th class="py-3.5 px-4">Услуга / Заявка</th>
+                            <th class="py-3.5 px-4">Телефон</th>
+                            <th class="py-3.5 px-4">Услуга / Запрос</th>
                             <th class="py-3.5 px-4">Дата и время</th>
                             <th class="py-3.5 px-4">Статус</th>
                             <th class="py-3.5 px-6 text-right">Действия</th>
                         </tr>
                     </thead>
                     <tbody id="leads-table-body" class="divide-y divide-slate-200 dark:divide-slate-700 text-sm">
-                        <!-- Dynamically populated -->
+                        <!-- Заполняется динамически -->
                     </tbody>
                 </table>
             </div>
 
             <!-- Cards View (Hidden by default) -->
             <div id="leads-cards-container" class="hidden p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Dynamically populated -->
+                <!-- Заполняется динамически -->
             </div>
 
             <!-- Empty State -->
             <div id="empty-state" class="hidden py-16 px-4 text-center">
                 <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-400">
-                    <i data-lucide="search-x" class="w-8 h-8"></i>
+                    <i class="fa-solid fa-folder-open text-xl"></i>
                 </div>
                 <h3 class="text-base font-semibold text-slate-700 dark:text-slate-200">Заявки не найдены</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Попробуйте изменить параметры фильтрации или поисковый запрос.</p>
-                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 rounded-xl text-xs font-medium hover:bg-indigo-100 transition-colors">
-                    Сбросить фильтры
-                </button>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Оформите заявку на главной странице сайта, чтобы она появилась здесь.</p>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer class="mt-auto py-6 border-t border-slate-200 dark:border-slate-700 text-center text-xs text-slate-400">
-        <p>LeadFlow CRM v2.5 • Интегрированная система обработки заявок с сайта</p>
+        <p>Elite Renovation CRM • Система управления заявками</p>
     </footer>
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-3 pointer-events-none"></div>
 
-    <!-- Modal: Lead Details & Notes -->
-    <div id="lead-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]">
-            <!-- Modal Header -->
+    <!-- Modal: Lead Details -->
+    <div id="lead-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col max-h-[90vh]">
             <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-slate-50 dark:bg-slate-900/50">
-                <div class="flex items-center space-x-3">
-                    <div id="modal-client-avatar" class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm">
-                        АИ
-                    </div>
-                    <div>
-                        <h3 id="modal-client-name" class="font-bold text-base">Имя Клиента</h3>
-                        <p id="modal-lead-date" class="text-xs text-slate-400">Дата заявки</p>
-                    </div>
-                </div>
+                <h3 id="modal-client-name" class="font-bold text-base">Детали заявки</h3>
                 <button onclick="closeLeadModal()" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-
-            <!-- Modal Body -->
-            <div class="p-6 overflow-y-auto space-y-6 flex-1">
-                <!-- Status & Category Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Услуга / Направление</label>
-                        <div id="modal-lead-service" class="px-3.5 py-2 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm font-medium border border-slate-200 dark:border-slate-700">Разработка сайта</div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Статус заявки</label>
-                        <select id="modal-lead-status" onchange="updateCurrentLeadStatus()" class="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer">
-                            <option value="new">Новая</option>
-                            <option value="in_progress">В работе</option>
-                            <option value="completed">Завершена</option>
-                            <option value="cancelled">Отменена</option>
-                        </select>
-                    </div>
+            <div class="p-6 overflow-y-auto space-y-4 flex-1">
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Клиент</label>
+                    <div id="modal-name-val" class="px-3.5 py-2 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm font-semibold border border-slate-200 dark:border-slate-700">-</div>
                 </div>
-
-                <!-- Contact details -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Телефон</label>
-                        <div class="flex items-center space-x-2">
-                            <div id="modal-lead-phone" class="flex-1 px-3.5 py-2 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm border border-slate-200 dark:border-slate-700 font-mono">+7 (999) 000-00-00</div>
-                            <a id="modal-call-btn" href="#" class="p-2.5 bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 rounded-xl hover:bg-emerald-100 transition-colors" title="Позвонить">
-                                <i data-lucide="phone" class="w-4 h-4"></i>
-                            </a>
-                        </div>
+                        <div id="modal-phone-val" class="px-3.5 py-2 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm border border-slate-200 dark:border-slate-700 font-mono">-</div>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Email</label>
-                        <div class="flex items-center space-x-2">
-                            <div id="modal-lead-email" class="flex-1 px-3.5 py-2 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm border border-slate-200 dark:border-slate-700 truncate">client@example.com</div>
-                            <a id="modal-email-btn" href="#" class="p-2.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-xl hover:bg-indigo-100 transition-colors" title="Написать Email">
-                                <i data-lucide="mail" class="w-4 h-4"></i>
-                            </a>
-                        </div>
+                        <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Дата</label>
+                        <div id="modal-date-val" class="px-3.5 py-2 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm border border-slate-200 dark:border-slate-700">-</div>
                     </div>
                 </div>
-
-                <!-- Message / Inquiry text -->
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Сообщение / Комментарий с формы сайта</label>
-                    <div id="modal-lead-message" class="p-4 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm border border-slate-200 dark:border-slate-700 whitespace-pre-wrap leading-relaxed">Текст сообщения от клиента...</div>
+                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Услуга / Запрос</label>
+                    <div id="modal-service-val" class="px-3.5 py-2 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm border border-slate-200 dark:border-slate-700">-</div>
                 </div>
-
-                <!-- Manager Notes -->
                 <div>
-                    <div class="flex items-center justify-between mb-1">
-                        <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider">Внутренние заметки менеджера</label>
-                        <span class="text-xs text-slate-400">Сохраняется автоматически</span>
-                    </div>
-                    <textarea id="modal-lead-notes" oninput="saveCurrentLeadNotes()" rows="3" placeholder="Добавьте примечание о договоренности, бюджете или следующем шаге..." class="w-full p-3.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"></textarea>
+                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Статус</label>
+                    <select id="modal-status-select" onchange="updateLeadStatusFromModal()" class="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium focus:outline-none cursor-pointer">
+                        <option value="new">Новая</option>
+                        <option value="in_progress">В работе</option>
+                        <option value="completed">Завершена</option>
+                        <option value="cancelled">Отменена</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Заметки менеджера</label>
+                    <textarea id="modal-notes-val" oninput="saveNotesFromModal()" rows="3" placeholder="Добавить комментарий..." class="w-full p-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none"></textarea>
                 </div>
             </div>
-
-            <!-- Modal Footer -->
-            <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between bg-slate-50 dark:bg-slate-900/50">
-                <button onclick="deleteCurrentLead()" class="px-4 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl transition-colors flex items-center space-x-1.5 cursor-pointer">
-                    <i data-lucide="trash-2" class="w-4 h-4"></i>
-                    <span>Удалить заявку</span>
+            <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-between bg-slate-50 dark:bg-slate-900/50">
+                <button onclick="deleteActiveLead()" class="px-4 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl transition-colors cursor-pointer">
+                    <i class="fa-solid fa-trash mr-1"></i> Удалить
                 </button>
-                <div class="flex items-center space-x-3">
-                    <button onclick="copyLeadDetails()" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-medium transition-colors flex items-center space-x-1.5 cursor-pointer">
-                        <i data-lucide="copy" class="w-4 h-4"></i>
-                        <span>Копировать данные</span>
-                    </button>
-                    <button onclick="closeLeadModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-medium transition-colors cursor-pointer">
-                        Готово
-                    </button>
-                </div>
+                <button onclick="closeLeadModal()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-black rounded-xl text-xs font-bold transition-colors cursor-pointer">
+                    Закрыть
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Modal: Add New Lead Manually -->
-    <div id="add-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white dark:bg-slate-800 w-full max-w-lg rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transform scale-95 transition-transform duration-300">
+    <!-- Modal: Add Manual Lead -->
+    <div id="add-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-slate-50 dark:bg-slate-900/50">
-                <h3 class="font-bold text-base flex items-center space-x-2">
-                    <i data-lucide="user-plus" class="w-5 h-5 text-indigo-600"></i>
-                    <span>Новая заявка вручную</span>
-                </h3>
-                <button onclick="closeAddModal()" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                <h3 class="font-bold text-base">Добавить заявку вручную</h3>
+                <button onclick="closeAddModal()" class="p-1.5 rounded-lg text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-            <form id="add-lead-form" onsubmit="handleManualLeadSubmit(event)" class="p-6 space-y-4">
+            <form onsubmit="handleManualAdd(event)" class="p-6 space-y-4">
                 <div>
                     <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Имя клиента *</label>
-                    <input type="text" id="add-name" required placeholder="например, Алексей Смирнов" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Телефон *</label>
-                        <input type="text" id="add-phone" required placeholder="+7 (999) 123-45-67" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Email</label>
-                        <input type="email" id="add-email" placeholder="client@domain.ru" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
+                    <input type="text" id="add-name" required placeholder="Иван Иванов" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Услуга / Тема</label>
-                    <select id="add-service" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <option value="Разработка сайта">Разработка сайта</option>
-                        <option value="SEO-продвижение">SEO-продвижение</option>
-                        <option value="Техподдержка">Техподдержка</option>
-                        <option value="UI/UX Дизайн">UI/UX Дизайн</option>
-                        <option value="Консультация">Консультация</option>
+                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Телефон *</label>
+                    <input type="tel" id="add-phone" required placeholder="+7 (999) 000-00-00" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Услуга</label>
+                    <select id="add-service" class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none">
+                        <option value="Капитальный ремонт">Капитальный ремонт</option>
+                        <option value="Косметический ремонт">Косметический ремонт</option>
+                        <option value="Дизайнерский ремонт">Дизайнерский ремонт</option>
+                        <option value="Ремонт домов">Ремонт домов</option>
+                        <option value="Заказать обратный звонок">Заказать обратный звонок</option>
                     </select>
                 </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Сообщение / Задача</label>
-                    <textarea id="add-message" rows="3" placeholder="Описание того, что требуется сделать..." class="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-                </div>
-                <div class="pt-2 flex items-center justify-end space-x-3">
-                    <button type="button" onclick="closeAddModal()" class="px-4 py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-sm font-medium transition-colors cursor-pointer">
-                        Отмена
-                    </button>
-                    <button type="submit" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition-colors shadow-sm cursor-pointer">
-                        Создать заявку
-                    </button>
+                <div class="pt-2 flex justify-end space-x-3">
+                    <button type="button" onclick="closeAddModal()" class="px-4 py-2.5 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-sm font-medium cursor-pointer">Отмена</button>
+                    <button type="submit" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black rounded-xl text-sm font-bold cursor-pointer">Сохранить</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- JavaScript Application Logic -->
+    <!-- Application Script -->
     <script>
-        // Initial Demo Leads Data
-        const defaultLeads = [
-            {
-                id: 'lead-1',
-                name: 'Максим Васильев',
-                phone: '+7 (926) 555-12-34',
-                email: 'm.vasilyev@yandex.ru',
-                service: 'Разработка сайта',
-                message: 'Добрый день! Хотели бы заказать разработку корпоративного портала с личным кабинетом. Какой порядок цен и сроков?',
-                date: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 mins ago
-                status: 'new',
-                notes: 'Ждет звонка в понедельник утром.'
-            },
-            {
-                id: 'lead-2',
-                name: 'Екатерина Орлова',
-                phone: '+7 (916) 444-88-99',
-                email: 'orlova.e@designstudio.io',
-                service: 'UI/UX Дизайн',
-                message: 'Требуется редизайн мобильного приложения интернет-магазина. Примеры ТЗ вышлем на почту.',
-                date: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString(), // 3 hours ago
-                status: 'in_progress',
-                notes: 'Скинули бриф, согласовываем смету.'
-            },
-            {
-                id: 'lead-3',
-                name: 'Дмитрий Соколов',
-                phone: '+7 (903) 777-22-11',
-                email: 'sokolov@stroy-garant.ru',
-                service: 'SEO-продвижение',
-                message: 'Интересует вывод сайта строительной тематики в топ-10 Яндекса по Москве.',
-                date: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), // 1 day ago
-                status: 'completed',
-                notes: 'Договор подписан, проект передан в SEO-отдел.'
-            },
-            {
-                id: 'lead-4',
-                name: 'Ольга Сергеева',
-                phone: '+7 (999) 111-33-22',
-                email: 'olga.s@mail.ru',
-                service: 'Консультация',
-                message: 'Нужна помощь по настройке контекстной рекламы и аудит посадочной страницы.',
-                date: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString(), // 2 days ago
-                status: 'cancelled',
-                notes: 'Клиент решил отложить проект до следующего квартала.'
-            }
-        ];
-
-        // Global State
         let leads = [];
         let currentViewMode = 'table';
         let activeLeadId = null;
 
-        // Initialization
-        window.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             loadLeads();
-            initTheme();
             filterLeads();
-            lucide.createIcons();
-
-            // Click outside export menu
-            window.addEventListener('click', (e) => {
-                const exportMenu = document.getElementById('export-menu');
-                const exportBtn = exportMenu.previousElementSibling;
-                if (!exportMenu.contains(e.target) && !exportBtn.contains(e.target)) {
-                    exportMenu.classList.add('hidden');
-                }
-            });
+            initTheme();
         });
 
-        // Load / Save Leads to LocalStorage
         function loadLeads() {
-            const saved = localStorage.getItem('leadflow_leads');
+            const saved = localStorage.getItem('crm_leads');
             if (saved) {
                 try {
                     leads = JSON.parse(saved);
-                } catch (e) {
-                    leads = defaultLeads;
+                } catch(e) {
+                    leads = [];
                 }
             } else {
-                leads = defaultLeads;
-                saveLeads();
+                // Дефолтная заявка, если пусто
+                leads = [
+                    { id: Date.now(), name: 'Михаил Решетов', phone: '+7 (926) 111-22-33', service: 'Капитальный ремонт', date: '2026-06-06 12:40', status: 'new', notes: '' }
+                ];
+                localStorage.setItem('crm_leads', JSON.stringify(leads));
             }
         }
 
         function saveLeads() {
-            localStorage.setItem('leadflow_leads', JSON.stringify(leads));
-        }
-
-        // Reset Demo Data
-        function resetDemoData() {
-            leads = defaultLeads;
-            saveLeads();
+            localStorage.setItem('crm_leads', JSON.stringify(leads));
             filterLeads();
-            showToast('Демо-данные успешно восстановлены', 'info');
-            document.getElementById('export-menu').classList.add('hidden');
         }
 
-        // Theme management
-        function initTheme() {
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
+        function filterLeads() {
+            const search = document.getElementById('search-input').value.toLowerCase();
+            const statusFilter = document.getElementById('status-filter').value;
+            const categoryFilter = document.getElementById('category-filter').value;
+            const sortOrder = document.getElementById('sort-order').value;
+
+            let filtered = leads.filter(lead => {
+                const matchSearch = (lead.name && lead.name.toLowerCase().includes(search)) ||
+                                    (lead.phone && lead.phone.toLowerCase().includes(search)) ||
+                                    (lead.service && lead.service.toLowerCase().includes(search));
+                const matchStatus = statusFilter === 'all' || lead.status === statusFilter;
+                const matchCategory = categoryFilter === 'all' || (lead.service && lead.service.includes(categoryFilter));
+                return matchSearch && matchStatus && matchCategory;
+            });
+
+            filtered.sort((a, b) => {
+                if (sortOrder === 'newest') return new Date(b.date || 0) - new Date(a.date || 0);
+                if (sortOrder === 'oldest') return new Date(a.date || 0) - new Date(b.date || 0);
+                if (sortOrder === 'name') return (a.name || '').localeCompare(b.name || '');
+                return 0;
+            });
+
+            renderStats();
+            renderLeads(filtered);
+        }
+
+        function renderStats() {
+            const total = leads.length;
+            const newCount = leads.filter(l => l.status === 'new' || !l.status).length;
+            const progressCount = leads.filter(l => l.status === 'in_progress').length;
+            const completedCount = leads.filter(l => l.status === 'completed').length;
+            const conversion = total > 0 ? Math.round((completedCount / total) * 100) : 0;
+
+            document.getElementById('stat-total').innerText = total;
+            document.getElementById('stat-new').innerText = newCount;
+            document.getElementById('stat-progress').innerText = progressCount;
+            document.getElementById('stat-completed').innerText = completedCount;
+            document.getElementById('stat-conversion').innerText = conversion + '%';
+        }
+
+        function renderLeads(list) {
+            const tbody = document.getElementById('leads-table-body');
+            const cardsContainer = document.getElementById('leads-cards-container');
+            const emptyState = document.getElementById('empty-state');
+
+            tbody.innerHTML = '';
+            cardsContainer.innerHTML = '';
+
+            if (list.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
             } else {
-                document.documentElement.classList.remove('dark');
+                emptyState.classList.add('hidden');
+            }
+
+            list.forEach(lead => {
+                const statusHtml = getStatusBadge(lead.status || 'new');
+                
+                // Табличная строка
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-900/40 transition';
+                tr.innerHTML = `
+                    <td class="py-3.5 px-6 font-medium text-white">${lead.name || 'Без имени'}</td>
+                    <td class="py-3.5 px-4 font-mono text-slate-300">${lead.phone || '-'}</td>
+                    <td class="py-3.5 px-4 text-slate-300">${lead.service || 'Заявка с сайта'}</td>
+                    <td class="py-3.5 px-4 text-xs text-slate-400">${lead.date || '-'}</td>
+                    <td class="py-3.5 px-4">${statusHtml}</td>
+                    <td class="py-3.5 px-6 text-right space-x-2">
+                        <button onclick="openLeadModal(${lead.id})" class="text-amber-500 hover:text-amber-400 p-1 cursor-pointer" title="Просмотреть"><i class="fa-solid fa-eye"></i></button>
+                        <button onclick="deleteLead(${lead.id})" class="text-rose-400 hover:text-rose-300 p-1 cursor-pointer" title="Удалить"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                // Карточка
+                const card = document.createElement('div');
+                card.className = 'bg-slate-900 border border-slate-700 p-4 rounded-xl flex flex-col justify-between space-y-3';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-white">${lead.name || 'Без имени'}</h4>
+                            ${statusHtml}
+                        </div>
+                        <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-phone mr-1"></i> ${lead.phone || '-'}</p>
+                        <p class="text-xs text-amber-500 font-medium"><i class="fa-solid fa-hammer mr-1"></i> ${lead.service || 'Заявка'}</p>
+                        <p class="text-[10px] text-slate-500 mt-2">${lead.date || ''}</p>
+                    </div>
+                    <div class="flex justify-end space-x-2 pt-2 border-t border-slate-800">
+                        <button onclick="openLeadModal(${lead.id})" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-500 rounded-lg text-xs cursor-pointer">Открыть</button>
+                        <button onclick="deleteLead(${lead.id})" class="px-3 py-1.5 bg-rose-950/40 text-rose-400 rounded-lg text-xs cursor-pointer">Удалить</button>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+        }
+
+        function getStatusBadge(status) {
+            switch(status) {
+                case 'new': return '<span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-full text-xs font-semibold">Новая</span>';
+                case 'in_progress': return '<span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded-full text-xs font-semibold">В работе</span>';
+                case 'completed': return '<span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold">Завершена</span>';
+                case 'cancelled': return '<span class="px-2.5 py-1 bg-rose-500/10 text-rose-400 border border-rose-500/30 rounded-full text-xs font-semibold">Отменена</span>';
+                default: return '<span class="px-2.5 py-1 bg-slate-500/10 text-slate-400 rounded-full text-xs font-semibold">Новая</span>';
             }
         }
 
-        function toggleDarkMode() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
-            }
-        }
-
-        // View Mode switcher
-        function viewMode(mode) {
+        function setViewMode(mode) {
             currentViewMode = mode;
             const tableContainer = document.getElementById('leads-table-container');
             const cardsContainer = document.getElementById('leads-cards-container');
@@ -541,494 +501,145 @@
             if (mode === 'table') {
                 tableContainer.classList.remove('hidden');
                 cardsContainer.classList.add('hidden');
-                btnTable.className = "p-1.5 rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-xs transition-all cursor-pointer";
-                btnCards.className = "p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-all cursor-pointer";
+                btnTable.className = 'p-1.5 rounded-lg text-amber-500 bg-white dark:bg-slate-800 shadow-xs cursor-pointer';
+                btnCards.className = 'p-1.5 rounded-lg text-slate-500 hover:text-slate-800 cursor-pointer';
             } else {
                 tableContainer.classList.add('hidden');
                 cardsContainer.classList.remove('hidden');
-                btnTable.className = "p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 transition-all cursor-pointer";
-                btnCards.className = "p-1.5 rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-xs transition-all cursor-pointer";
-            }
-            filterLeads();
-        }
-
-        // Alias for onclick
-        function setViewMode(mode) {
-            viewMode(mode);
-        }
-
-        // Simulate incoming lead from website
-        function simulateNewLead() {
-            const names = ['Артем Белов', 'Виктория Павлова', 'Илья Мельников', 'Светлана Морозова', 'Тимур Новиков', 'Алина Ковалева'];
-            const services = ['Разработка сайта', 'SEO-продвижение', 'Техподдержка', 'UI/UX Дизайн', 'Консультация'];
-            const messages = [
-                'Здравствуйте! Оставил заявку на вашем сайте. Хотим обсудить проект под ключ.',
-                'Добрый день. Интересует стоимость и сроки выполнения работ.',
-                'Нужна консультация специалиста в ближайшее время. Перезвоните.',
-                'Заполнил форму на сайте. Готовы выслать ТЗ для оценки стоимости.',
-                'Приветствую! Хотели бы заказать комплексное продвижение бизнеса.'
-            ];
-
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            const randomService = services[Math.floor(Math.random() * services.length)];
-            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-            const randomPhone = `+7 (9${Math.floor(Math.random() * 9)}0) ${Math.floor(100 + Math.random() * 900)}-${Math.floor(10 + Math.random() * 89)}-${Math.floor(10 + Math.random() * 89)}`;
-            const randomEmail = `${randomName.split(' ')[0].toLowerCase()}@mail.ru`;
-
-            const newLead = {
-                id: 'lead-' + Date.now(),
-                name: randomName,
-                phone: randomPhone,
-                email: randomEmail,
-                service: randomService,
-                message: randomMsg,
-                date: new Date().toISOString(),
-                status: 'new',
-                notes: 'Поступила автоматически с формы сайта.'
-            };
-
-            leads.unshift(newLead);
-            saveLeads();
-            filterLeads();
-
-            // Show Toast
-            showToast(`Новая заявка от ${randomName} (${randomService})!`, 'success');
-        }
-
-        // Toast notifications generator
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            
-            const bgClass = type === 'success' 
-                ? 'bg-emerald-600 text-white' 
-                : 'bg-indigo-600 text-white';
-
-            toast.className = `${bgClass} px-4 py-3 rounded-xl shadow-lg flex items-center space-x-3 text-sm font-medium transform translate-y-5 opacity-0 transition-all duration-300 pointer-events-auto`;
-            
-            const iconName = type === 'success' ? 'check-circle' : 'info';
-            toast.innerHTML = `
-                <i data-lucide="${iconName}" class="w-5 h-5 shrink-0"></i>
-                <span>${message}</span>
-            `;
-
-            container.appendChild(toast);
-            lucide.createIcons();
-
-            // Animate in
-            setTimeout(() => {
-                toast.classList.remove('translate-y-5', 'opacity-0');
-            }, 10);
-
-            // Animate out & remove
-            setTimeout(() => {
-                toast.classList.add('translate-y-5', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
-        }
-
-        // Filter and Render Leads
-        function filterLeads() {
-            const searchQuery = document.getElementById('search-input').value.toLowerCase();
-            const statusFilter = document.getElementById('status-filter').value;
-            const categoryFilter = document.getElementById('category-filter').value;
-            const sortOrder = document.getElementById('sort-order').value;
-
-            // Filter
-            let filtered = leads.filter(lead => {
-                const matchesSearch = 
-                    lead.name.toLowerCase().includes(searchQuery) ||
-                    lead.phone.toLowerCase().includes(searchQuery) ||
-                    lead.email.toLowerCase().includes(searchQuery) ||
-                    lead.message.toLowerCase().includes(searchQuery);
-
-                const matchesStatus = statusFilter === 'all' || lead.status === statusFilter;
-                const matchesCategory = categoryFilter === 'all' || lead.service === categoryFilter;
-
-                return matchesSearch && matchesStatus && matchesCategory;
-            });
-
-            // Sort
-            filtered.sort((a, b) => {
-                if (sortOrder === 'newest') {
-                    return new Date(b.date) - new Date(a.date);
-                } else if (sortOrder === 'oldest') {
-                    return new Date(a.date) - new Date(b.date);
-                } else if (sortOrder === 'name') {
-                    return a.name.localeCompare(b.name);
-                }
-            });
-
-            renderStats();
-            renderTable(filtered);
-            renderCards(filtered);
-        }
-
-        function resetFilters() {
-            document.getElementById('search-input').value = '';
-            document.getElementById('status-filter').value = 'all';
-            document.getElementById('category-filter').value = 'all';
-            document.getElementById('sort-order').value = 'newest';
-            filterLeads();
-        }
-
-        // Render Statistics
-        function renderStats() {
-            const total = leads.length;
-            const newCount = leads.filter(l => l.status === 'new').length;
-            const progressCount = leads.filter(l => l.status === 'in_progress').length;
-            const completedCount = leads.filter(l => l.status === 'completed').length;
-            const conversion = total > 0 ? Math.round((completedCount / total) * 100) : 0;
-
-            document.getElementById('stat-total').textContent = total;
-            document.getElementById('stat-new').textContent = newCount;
-            document.getElementById('stat-progress').textContent = progressCount;
-            document.getElementById('stat-completed').textContent = completedCount;
-            document.getElementById('stat-conversion').textContent = conversion + '%';
-
-            const newBadge = document.getElementById('stat-new-badge');
-            if (newCount > 0) {
-                newBadge.textContent = `${newCount} новых`;
-                newBadge.className = 'text-xs text-amber-600 dark:text-amber-400 font-bold';
-            } else {
-                newBadge.textContent = 'Все обработаны';
-                newBadge.className = 'text-xs text-slate-400 font-normal';
+                btnCards.className = 'p-1.5 rounded-lg text-amber-500 bg-white dark:bg-slate-800 shadow-xs cursor-pointer';
+                btnTable.className = 'p-1.5 rounded-lg text-slate-500 hover:text-slate-800 cursor-pointer';
             }
         }
 
-        // Status badge helper
-        function getStatusBadge(status) {
-            switch(status) {
-                case 'new':
-                    return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900"><span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span>Новая</span>';
-                case 'in_progress':
-                    return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5"></span>В работе</span>';
-                case 'completed':
-                    return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5"></span>Завершена</span>';
-                case 'cancelled':
-                    return '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 mr-1.5"></span>Отменена</span>';
-                default:
-                    return '';
-            }
-        }
-
-        // Format Date nicely
-        function formatDate(isoString) {
-            const date = new Date(isoString);
-            const now = new Date();
-            const isToday = date.toDateString() === now.toDateString();
-            
-            const timeStr = date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-            if (isToday) {
-                return `Сегодня в ${timeStr}`;
-            }
-            return `${date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })} в ${timeStr}`;
-        }
-
-        // Render Table view
-        function renderTable(filteredLeads) {
-            const tbody = document.getElementById('leads-table-body');
-            const emptyState = document.getElementById('empty-state');
-            const tableContainer = document.getElementById('leads-table-container');
-
-            if (filteredLeads.length === 0) {
-                tbody.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                return;
-            }
-            emptyState.classList.add('hidden');
-
-            tbody.innerHTML = filteredLeads.map(lead => `
-                <tr onclick="openLeadModal('${lead.id}')" class="hover:bg-slate-50/80 dark:hover:bg-slate-700/50 transition-colors cursor-pointer group">
-                    <td class="py-4 px-6">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-9 h-9 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xs shrink-0">
-                                ${getInitials(lead.name)}
-                            </div>
-                            <div>
-                                <div class="font-semibold text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 transition-colors">${lead.name}</div>
-                                <div class="text-xs text-slate-400 truncate max-w-xs">${lead.message}</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="py-4 px-4">
-                        <div class="text-xs font-mono text-slate-700 dark:text-slate-300">${lead.phone}</div>
-                        <div class="text-xs text-slate-400">${lead.email || '—'}</div>
-                    </td>
-                    <td class="py-4 px-4">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300">
-                            ${lead.service}
-                        </span>
-                    </td>
-                    <td class="py-4 px-4 text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                        ${formatDate(lead.date)}
-                    </td>
-                    <td class="py-4 px-4">
-                        ${getStatusBadge(lead.status)}
-                    </td>
-                    <td class="py-4 px-6 text-right" onclick="event.stopPropagation()">
-                        <div class="flex items-center justify-end space-x-1">
-                            <button onclick="openLeadModal('${lead.id}')" class="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors" title="Просмотр">
-                                <i data-lucide="eye" class="w-4 h-4"></i>
-                            </button>
-                            <a href="tel:${lead.phone}" class="p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition-colors" title="Позвонить">
-                                <i data-lucide="phone" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
-            lucide.createIcons();
-        }
-
-        // Render Cards view
-        function renderCards(filteredLeads) {
-            const container = document.getElementById('leads-cards-container');
-            if (filteredLeads.length === 0) {
-                container.innerHTML = '';
-                return;
-            }
-
-            container.innerHTML = filteredLeads.map(lead => `
-                <div onclick="openLeadModal('${lead.id}')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs hover:shadow-md hover:border-indigo-500/50 transition-all cursor-pointer flex flex-col justify-between space-y-4 group">
-                    <div>
-                        <div class="flex items-start justify-between mb-3">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xs">
-                                    ${getInitials(lead.name)}
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-slate-800 dark:text-slate-100 group-hover:text-indigo-600 transition-colors">${lead.name}</h4>
-                                    <span class="text-xs text-slate-400">${formatDate(lead.date)}</span>
-                                </div>
-                            </div>
-                            <div>
-                                ${getStatusBadge(lead.status)}
-                            </div>
-                        </div>
-
-                        <div class="space-y-1.5 mb-3">
-                            <div class="inline-block px-2.5 py-0.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 mb-1">
-                                ${lead.service}
-                            </div>
-                            <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
-                                "${lead.message}"
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs">
-                        <div class="font-mono text-slate-600 dark:text-slate-300 flex items-center space-x-1.5">
-                            <i data-lucide="phone-call" class="w-3.5 h-3.5 text-slate-400"></i>
-                            <span>${lead.phone}</span>
-                        </div>
-                        <div class="flex items-center space-x-1" onclick="event.stopPropagation()">
-                            <a href="tel:${lead.phone}" class="p-1.5 rounded-lg text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition-colors" title="Позвонить">
-                                <i data-lucide="phone" class="w-4 h-4"></i>
-                            </a>
-                            <a href="mailto:${lead.email}" class="p-1.5 rounded-lg text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors" title="Email">
-                                <i data-lucide="mail" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            lucide.createIcons();
-        }
-
-        function getInitials(name) {
-            return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
-        }
-
-        // Modal: Lead Details Actions
         function openLeadModal(id) {
             activeLeadId = id;
             const lead = leads.find(l => l.id === id);
             if (!lead) return;
 
-            document.getElementById('modal-client-name').textContent = lead.name;
-            document.getElementById('modal-client-avatar').textContent = getInitials(lead.name);
-            document.getElementById('modal-lead-date').textContent = `Заявка от ${formatDate(lead.date)}`;
-            document.getElementById('modal-lead-service').textContent = lead.service;
-            document.getElementById('modal-lead-status').value = lead.status;
-            document.getElementById('modal-lead-phone').textContent = lead.phone;
-            document.getElementById('modal-call-btn').href = `tel:${lead.phone}`;
-            document.getElementById('modal-lead-email').textContent = lead.email || 'Не указан';
-            document.getElementById('modal-email-btn').href = lead.email ? `mailto:${lead.email}` : '#';
-            document.getElementById('modal-lead-message').textContent = lead.message || 'Сообщение отсутствует';
-            document.getElementById('modal-lead-notes').value = lead.notes || '';
+            document.getElementById('modal-client-name').innerText = lead.name || 'Заявка';
+            document.getElementById('modal-name-val').innerText = lead.name || '-';
+            document.getElementById('modal-phone-val').innerText = lead.phone || '-';
+            document.getElementById('modal-date-val').innerText = lead.date || '-';
+            document.getElementById('modal-service-val').innerText = lead.service || '-';
+            document.getElementById('modal-status-select').value = lead.status || 'new';
+            document.getElementById('modal-notes-val').value = lead.notes || '';
 
-            const modal = document.getElementById('lead-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modal.querySelector('div > div').classList.remove('scale-95');
-                modal.querySelector('div > div').classList.add('scale-100');
-            }, 10);
+            document.getElementById('lead-modal').classList.remove('hidden');
         }
 
         function closeLeadModal() {
-            const modal = document.getElementById('lead-modal');
-            modal.classList.add('opacity-0');
-            modal.querySelector('div > div').classList.remove('scale-100');
-            modal.querySelector('div > div').classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                activeLeadId = null;
-            }, 300);
+            document.getElementById('lead-modal').classList.add('hidden');
+            activeLeadId = null;
         }
 
-        function updateCurrentLeadStatus() {
+        function updateLeadStatusFromModal() {
             if (!activeLeadId) return;
-            const newStatus = document.getElementById('modal-lead-status').value;
+            const newStatus = document.getElementById('modal-status-select').value;
             const lead = leads.find(l => l.id === activeLeadId);
             if (lead) {
                 lead.status = newStatus;
                 saveLeads();
-                filterLeads();
-                showToast('Статус заявки обновлен', 'info');
             }
         }
 
-        function saveCurrentLeadNotes() {
+        function saveNotesFromModal() {
             if (!activeLeadId) return;
-            const notes = document.getElementById('modal-lead-notes').value;
+            const notes = document.getElementById('modal-notes-val').value;
             const lead = leads.find(l => l.id === activeLeadId);
             if (lead) {
                 lead.notes = notes;
+                localStorage.setItem('crm_leads', JSON.stringify(leads));
+            }
+        }
+
+        function deleteLead(id) {
+            if (confirm('Вы уверены, что хотите удалить эту заявку?')) {
+                leads = leads.filter(l => l.id !== id);
                 saveLeads();
             }
         }
 
-        function deleteCurrentLead() {
-            if (!activeLeadId) return;
-            leads = leads.filter(l => l.id !== activeLeadId);
-            saveLeads();
-            filterLeads();
-            closeLeadModal();
-            showToast('Заявка удалена', 'info');
-        }
-
-        function copyLeadDetails() {
-            const lead = leads.find(l => l.id === activeLeadId);
-            if (!lead) return;
-
-            const text = `Заявка #${lead.id}\nИмя: ${lead.name}\nТелефон: ${lead.phone}\nEmail: ${lead.email}\nУслуга: ${lead.service}\nСообщение: ${lead.message}\nСтатус: ${lead.status}`;
-            
-            // Fallback for iFrame clipboard
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast('Данные скопированы в буфер обмена', 'success');
-            } catch (err) {
-                showToast('Не удалось скопировать', 'info');
+        function deleteActiveLead() {
+            if (activeLeadId) {
+                deleteLead(activeLeadId);
+                closeLeadModal();
             }
-            document.body.removeChild(textArea);
         }
 
-        // Add Manual Lead Modal
         function openAddModal() {
-            const modal = document.getElementById('add-modal');
-            document.getElementById('add-lead-form').reset();
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modal.querySelector('div > div').classList.remove('scale-95');
-                modal.querySelector('div > div').classList.add('scale-100');
-            }, 10);
+            document.getElementById('add-modal').classList.remove('hidden');
         }
 
         function closeAddModal() {
-            const modal = document.getElementById('add-modal');
-            modal.classList.add('opacity-0');
-            modal.querySelector('div > div').classList.remove('scale-100');
-            modal.querySelector('div > div').classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            document.getElementById('add-modal').classList.add('hidden');
         }
 
-        function handleManualLeadSubmit(e) {
+        function handleManualAdd(e) {
             e.preventDefault();
             const name = document.getElementById('add-name').value;
             const phone = document.getElementById('add-phone').value;
-            const email = document.getElementById('add-email').value;
             const service = document.getElementById('add-service').value;
-            const message = document.getElementById('add-message').value;
 
-            const newLead = {
-                id: 'lead-' + Date.now(),
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0,10) + ' ' + now.toTimeString().slice(0,5);
+
+            leads.unshift({
+                id: Date.now(),
                 name,
                 phone,
-                email,
                 service,
-                message: message || 'Заявка добавлена вручную менеджером.',
-                date: new Date().toISOString(),
+                date: dateStr,
                 status: 'new',
-                notes: 'Создано вручную.'
-            };
+                notes: ''
+            });
 
-            leads.unshift(newLead);
             saveLeads();
-            filterLeads();
             closeAddModal();
-            showToast('Новая заявка успешно добавлена', 'success');
+            e.target.reset();
         }
 
-        // Toggle export menu
         function toggleExportMenu() {
-            const menu = document.getElementById('export-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('export-menu').classList.toggle('hidden');
         }
 
-        // Export Data (JSON / CSV)
-        function exportData(format) {
-            document.getElementById('export-menu').classList.add('hidden');
-            if (leads.length === 0) {
-                showToast('Нет данных для экспорта', 'info');
-                return;
-            }
+        function exportExcel() {
+            const dataToExport = leads.map(l => ({
+                'ID': l.id,
+                'Клиент': l.name,
+                'Телефон': l.phone,
+                'Услуга': l.service,
+                'Дата': l.date,
+                'Статус': l.status,
+                'Заметки': l.notes
+            }));
+            const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Заявки");
+            XLSX.writeFile(workbook, "Elite_Renovation_Leads.xlsx");
+        }
 
-            if (format === 'json') {
-                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(leads, null, 2));
-                const downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute("href", dataStr);
-                downloadAnchor.setAttribute("download", `leadflow_export_${new Date().toISOString().slice(0,10)}.json`);
-                document.body.appendChild(downloadAnchor);
-                downloadAnchor.click();
-                downloadAnchor.remove();
-                showToast('Данные успешно экспортированы в JSON', 'success');
-            } else if (format === 'csv') {
-                let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-                csvContent += "ID,Name,Phone,Email,Service,Message,Date,Status,Notes\r\n";
-                
-                leads.forEach(l => {
-                    const row = [
-                        l.id,
-                        `"${(l.name || '').replace(/"/g, '""')}"`,
-                        `"${(l.phone || '').replace(/"/g, '""')}"`,
-                        `"${(l.email || '').replace(/"/g, '""')}"`,
-                        `"${(l.service || '').replace(/"/g, '""')}"`,
-                        `"${(l.message || '').replace(/"/g, '""')}"`,
-                        l.date,
-                        l.status,
-                        `"${(l.notes || '').replace(/"/g, '""')}"`
-                    ];
-                    csvContent += row.join(",") + "\r\n";
-                });
+        function exportJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(leads, null, 2));
+            const dlAnchorElem = document.createElement('a');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "crm_leads.json");
+            dlAnchorElem.click();
+        }
 
-                const encodedUri = encodeURI(csvContent);
-                const downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute("href", encodedUri);
-                downloadAnchor.setAttribute("download", `leadflow_export_${new Date().toISOString().slice(0,10)}.csv`);
-                document.body.appendChild(downloadAnchor);
-                downloadAnchor.click();
-                downloadAnchor.remove();
-                showToast('Данные успешно экспортированы в CSV', 'success');
+        function resetDemoData() {
+            if (confirm('Сбросить все данные к начальным?')) {
+                localStorage.removeItem('crm_leads');
+                loadLeads();
+                filterLeads();
             }
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function initTheme() {
+            document.documentElement.classList.add('dark');
         }
     </script>
 </body>
